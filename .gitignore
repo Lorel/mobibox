@@ -10,3 +10,4 @@ log/*
 tmp/*
 uploads/*
 /mobibox.sublime-workspace
+/.byebug_history
