@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130628082245) do
+ActiveRecord::Schema.define(version: 20161019015846) do
 
   create_table "folders", force: :cascade do |t|
     t.string   "name"
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20130628082245) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
+    t.string   "account"
     t.string   "email"
     t.string   "hashed_password"
     t.string   "password_salt"

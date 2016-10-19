@@ -7,9 +7,9 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password
   validates_length_of :password, :in => 6..20, :allow_blank => true
   validates_presence_of :password, :if => :password_required
-  validates_presence_of :name, :unless => :new_record?
+  validates_presence_of :account, :unless => :new_record?
   validates_presence_of :email
-  validates_uniqueness_of :name, :unless => :new_record? && :name_is_blank?
+  validates_uniqueness_of :account, :unless => :new_record? && :account_is_blank?
   validates_uniqueness_of :email
   validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/
 
@@ -66,13 +66,13 @@ class User < ActiveRecord::Base
     save(:validate => false)
   end
 
-  def name_is_blank?
-    self.name.blank?
+  def account_is_blank?
+    self.account.blank?
   end
 
-  def self.authenticate(name, password)
-    return nil if name.blank? || password.blank?
-    user = find_by_name(name) or return nil
+  def self.authenticate(account, password)
+    return nil if account.blank? || password.blank?
+    user = find_by_account(account) or return nil
     hash = Digest::SHA256.hexdigest(user.password_salt + password)
     hash == user.hashed_password ? user : nil
   end
@@ -89,7 +89,7 @@ class User < ActiveRecord::Base
   end
 
   def clear_signup_token
-    unless self.name.blank?
+    unless self.account.blank?
       self.signup_token = nil
       self.signup_token_expires_at = nil
     end

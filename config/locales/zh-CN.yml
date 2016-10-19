@@ -205,7 +205,7 @@
         expires_at: 失效期
       user:
         email: 邮箱
-        name: 用户名
+        account: 用户名
         password: 密码
       user_file:
         name: 文件名

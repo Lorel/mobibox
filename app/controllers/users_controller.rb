@@ -4,8 +4,8 @@ class UsersController < ApplicationController
   before_action :require_deleted_user_isnt_admin, :only => :destroy
 
   def index
-    @users = User.where.not(:name => nil).order('name')
-    @new_users = User.where(:name => nil).order('email')
+    @users = User.where.not(:account => nil).order('account')
+    @new_users = User.where(:account => nil).order('email')
   end
 
   def new

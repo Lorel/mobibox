@@ -1,0 +1,5 @@
+class ChangeNameToAccountOfUser < ActiveRecord::Migration[5.0]
+  def change
+  	rename_column :users, :name, :account
+  end
+end

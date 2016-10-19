@@ -2,7 +2,13 @@
 	"folders":
 	[
 		{
-			"path": "/home/darfux/Project/Lab/mobibox"
+			"path": "/home/darfux/Project/Lab/mobibox",
+			"folder_exclude_patterns": ["tmp"]
 		}
-	]
+	],
+	"settings":
+	{
+		"tab_size": 2,
+		"translate_tabs_to_spaces": true
+	}
 }

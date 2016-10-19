@@ -14,26 +14,26 @@ class UserTest < ActiveSupport::TestCase
     assert user.save
   end
 
-  test 'name can be empty for a new user' do
-    create(:user, :name => '', :email => 'test@test.com')
-    assert User.exists?(:name => '', :email => 'test@test.com')
+  test 'account can be empty for a new user' do
+    create(:user, :account => '', :email => 'test@test.com')
+    assert User.exists?(:account => '', :email => 'test@test.com')
   end
 
   test 'signup_token and signup_token_expires_at are set for a new user' do
-    user = create(:user, :name => '', :email => 'test@test.com')
+    user = create(:user, :account => '', :email => 'test@test.com')
     assert !user.signup_token.empty?
     assert user.signup_token_expires_at > 1.hour.from_now
   end
 
-  test 'name cannot be empty for an existing user' do
+  test 'account cannot be empty for an existing user' do
     user = create(:user)
-    user.name = ''
+    user.account = ''
     assert_raise(ActiveRecord::RecordInvalid) { user.save! }
   end
 
   test 'signup_token and signup_token_expires_at are nil for an existing user' do
-    user = create(:user, :name => '', :email => 'test@test.com')
-    user.name = 'test'
+    user = create(:user, :account => '', :email => 'test@test.com')
+    user.account = 'test'
     user.save
     assert user.signup_token.nil?
     assert user.signup_token_expires_at.nil?
@@ -43,10 +43,10 @@ class UserTest < ActiveSupport::TestCase
     assert_raise(ActiveRecord::RecordInvalid) { create(:user, :email => '') }
   end
 
-  test 'name is unique' do
-    create(:user, :name => 'Test')
-    assert User.exists?(:name => 'Test')
-    assert_raise(ActiveRecord::RecordInvalid) { create(:user, :name => 'Test') }
+  test 'account is unique' do
+    create(:user, :account => 'Test')
+    assert User.exists?(:account => 'Test')
+    assert_raise(ActiveRecord::RecordInvalid) { create(:user, :account => 'Test') }
   end
 
   test 'email is unique' do
@@ -63,7 +63,9 @@ class UserTest < ActiveSupport::TestCase
     assert_raise(ActiveRecord::RecordInvalid) { create(:user, :email => 'test@$%^.com') }
     assert_raise(ActiveRecord::RecordInvalid) { create(:user, :email => 'test@test.c') }
     assert_raise(ActiveRecord::RecordInvalid) { create(:user, :email => 'test@test.$$$') }
-    assert_nothing_raised(ActiveRecord::RecordInvalid) { create(:user, :email => 'test@test.com') }
+
+    # ActiveRecord::RecordInvalid
+    assert_nothing_raised { create(:user, :email => 'test@test.com') }
   end
 
   test 'reset_password_token gets cleared' do
@@ -157,7 +159,7 @@ class UserTest < ActiveSupport::TestCase
     assert user.save
     assert_not_equal user.password_salt, salt
     assert_not_equal user.hashed_password, hash
-    assert User.authenticate(user.name, 'test1234')
+    assert User.authenticate(user.account, 'test1234')
   end
 
   test 'whether a user is member of admins or not' do
@@ -211,15 +213,15 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'authentication' do
-    user = create(:user, :name => 'testname', :password => 'secret')
+    user = create(:user, :account => 'testaccount', :password => 'secret')
     assert !User.authenticate(nil, nil)
     assert !User.authenticate('', '')
-    assert !User.authenticate('testname', nil)
-    assert !User.authenticate('testname', '')
+    assert !User.authenticate('testaccount', nil)
+    assert !User.authenticate('testaccount', '')
     assert !User.authenticate(nil, 'secret')
     assert !User.authenticate('', 'secret')
     assert !User.authenticate('test', 'test')
-    assert User.authenticate('testname', 'secret')
+    assert User.authenticate('testaccount', 'secret')
   end
 
   test 'whether there is an admin user or not' do

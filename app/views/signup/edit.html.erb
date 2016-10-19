@@ -4,8 +4,8 @@
 <%= form_for @user, :url => { :action => 'update' } do |f| %>
   <%= f.error_messages %>
   <p>
-    <%= f.label :name %>:<br>
-    <%= f.text_field :name, { :class => 'text_input' } %>
+    <%= f.label :account %>:<br>
+    <%= f.text_field :account, { :class => 'text_input' } %>
   </p>
   <p>
     <%= f.label :email %>:<br>
