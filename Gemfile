@@ -40,3 +40,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
+
+
+
+
+gem 'config'

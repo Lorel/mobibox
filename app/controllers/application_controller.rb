@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   before_action :require_admin_in_system
-  before_action :require_login
+  before_action :authenticate_user!
 
   helper_method :clipboard, :current_user, :signed_in?, :permitted_params
 
@@ -12,9 +12,9 @@ class ApplicationController < ActionController::Base
     session[:clipboard] ||= Clipboard.new
   end
 
-  def current_user
-    @current_user ||= User.find_by_id(session[:user_id])
-  end
+  # def current_user
+  #   @current_user ||= User.find_by_id(session[:user_id])
+  # end
 
   def signed_in?
     !!current_user
@@ -73,4 +73,5 @@ class ApplicationController < ActionController::Base
   rescue ActiveRecord::RecordNotFound
     redirect_to Folder.root, :alert => t(:already_deleted, :type => t(:this_folder))
   end
+
 end

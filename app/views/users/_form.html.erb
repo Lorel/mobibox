@@ -1,16 +1,16 @@
 <%= form_for @user do |f| %>
   <%= f.error_messages %>
-  <% unless @user.new_record? -%>
+  <%# unless @user.new_record? -%>
   <p>
     <%= f.label :account %>:<br>
     <%= f.text_field :account, { :class => 'text_input' } %>
   </p>
-  <% end -%>
+  <%# end -%>
   <p>
     <%= f.label :email %>:<br>
     <%= f.text_field :email, { :class => 'text_input' } %>
   </p>
-  <% unless @user.new_record? -%>
+  <%# unless @user.new_record? -%>
   <p>
     <%= f.label :password %>:<br>
     <%= f.password_field :password, { :class => 'text_input' } %>
@@ -19,7 +19,7 @@
     <%= label_tag t(:confirm_password) %>:<br>
     <%= f.password_field :password_confirmation, { :class => 'text_input' } %>
   </p>
-  <% end -%>
+  <%# end -%>
   <% if signed_in? && current_user.member_of_admins? -%>
   <p>
     <%= t :member_of_these_groups %>:

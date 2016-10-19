@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019015846) do
+ActiveRecord::Schema.define(version: 20161019145626) do
 
   create_table "folders", force: :cascade do |t|
     t.string   "name"
@@ -73,7 +73,13 @@ ActiveRecord::Schema.define(version: 20161019015846) do
     t.datetime "updated_at"
     t.string   "signup_token"
     t.datetime "signup_token_expires_at"
+    t.integer  "sso_id"
+    t.integer  "stu_id"
+    t.string   "name"
+    t.string   "nickname"
     t.index ["signup_token"], name: "index_users_on_signup_token"
+    t.index ["sso_id"], name: "index_users_on_sso_id"
+    t.index ["stu_id"], name: "index_users_on_stu_id"
   end
 
 end

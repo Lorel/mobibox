@@ -8,10 +8,10 @@ class User < ActiveRecord::Base
   validates_length_of :password, :in => 6..20, :allow_blank => true
   validates_presence_of :password, :if => :password_required
   validates_presence_of :account, :unless => :new_record?
-  validates_presence_of :email
+  # validates_presence_of :email
   validates_uniqueness_of :account, :unless => :new_record? && :account_is_blank?
-  validates_uniqueness_of :email
-  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/
+  validates_uniqueness_of :email, :unless => :email_is_blank?
+  validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/, :unless => :email_is_blank?
 
   before_create :set_signup_token
   before_save :clear_reset_password_token, :unless => :dont_clear_reset_password_token
@@ -68,6 +68,10 @@ class User < ActiveRecord::Base
 
   def account_is_blank?
     self.account.blank?
+  end
+
+  def email_is_blank?
+    self.email.blank?
   end
 
   def self.authenticate(account, password)
