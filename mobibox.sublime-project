@@ -2,8 +2,11 @@
 	"folders":
 	[
 		{
-			"path": "/home/darfux/Project/Lab/mobibox",
-			"folder_exclude_patterns": ["tmp"]
+			"folder_exclude_patterns":
+			[
+				"tmp"
+			],
+			"path": "/home/darfux/Project/Lab/mobibox"
 		}
 	],
 	"settings":
