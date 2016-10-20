@@ -19,10 +19,11 @@ module MobiSSO
 
       def find_or_create_user
         # TODO: update uinfo
-        return if session[:user_id]
+        return true if session[:user_id]
         u = User.new(sso_user_info)
         u.save!
         session[:user_id] = u.id
+        u
       end
 
       def current_user

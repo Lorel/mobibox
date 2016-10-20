@@ -74,4 +74,13 @@ class ApplicationController < ActionController::Base
     redirect_to Folder.root, :alert => t(:already_deleted, :type => t(:this_folder))
   end
 
+
+  def find_or_create_user
+    ret = super
+    return if ret==true
+    User.find_by_id(ret)
+    ret.groups << Group.find(2)
+    ret.save!
+  end
+
 end
