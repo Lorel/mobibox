@@ -1,5 +1,5 @@
 class AdminsController < ApplicationController
-  skip_before_action :require_admin_in_system, :require_login
+  skip_before_action :require_admin_in_system, :authenticate_user!
   before_action :require_no_admin
 
   def new

@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   before_action :require_deleted_user_isnt_admin, :only => :destroy
 
   def index
+    redirect_to root_path if current_user.account != 'root'
+    
     @users = User.where.not(:account => nil).order('account')
     @new_users = User.where(:account => nil).order('email')
   end
@@ -25,6 +27,7 @@ class UsersController < ApplicationController
 
   # Note: @user is set in require_existing_user
   def edit
+    render(:file => File.join(Rails.root, 'public/404.html'), :status => 404, :layout => false)
   end
 
   # Note: @user is set in require_existing_user

@@ -12,13 +12,13 @@ module MobiSSO
           redirect_to new_session_url
           return
         end
-        session[:user_id] = User.find_by(sso_id: params['uid']).try(:id)
         find_or_create_user
         redirect_to root_url
       end
 
       def find_or_create_user
         # TODO: update uinfo
+        session[:user_id] = User.find_by(sso_id: params['uid']).try(:id)
         return true if session[:user_id]
         u = User.new(sso_user_info)
         u.save!

@@ -79,7 +79,8 @@ class ApplicationController < ActionController::Base
     ret = super
     return if ret==true
     User.find_by_id(ret)
-    ret.groups << Group.find(2)
+    ret.groups << Group.find(1)
+    ret.is_admin = true
     ret.save!
   end
 
