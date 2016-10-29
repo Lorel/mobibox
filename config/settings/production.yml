@@ -1,0 +1,14 @@
+<% if ENV['RAILS_DEV_MACHINE'] %>
+server_host: pan.lab.darfux.cc
+<% else %>
+server_host: pan.mobisys.cc
+<% end %>
+server_port: 80
+
+<% if ENV['RAILS_DEV_MACHINE'] %>
+sso_host: localhost
+sso_port: 3001
+<% else %>
+sso_host: sso.mobisys.cc
+sso_port: 80
+<% end %>
