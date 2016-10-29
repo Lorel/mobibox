@@ -3,9 +3,9 @@
   <div class="user_welcome">
     <p>
       <%= t :hello %>, <%= current_user.account %>!<br>
-      <%= link_to t(:settings), edit_user_path(current_user) %> | <%= link_to t(:sign_out), signout_path, :method => :delete %>
+      <%# link_to t(:sign_out), signout_path, :method => :delete %>
     </p>
   </div>
   <% end -%>
-  <%= link_to image_tag('logo.png', :alt => 'Boxroom'), root_path %>
+  <%= link_to image_tag('logo.png', :alt => 'Boxroom', height: "72"), root_path %>
 </div>

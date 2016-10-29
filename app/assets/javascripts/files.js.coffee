@@ -20,9 +20,10 @@ jQuery ->
       if data.context
         progress = parseInt(data.loaded / data.total * 100)
         data.context.find('.percentage').html("#{progress}%")
+        console.log data.loaded, data.total
         if data.loaded == data.total
           data.context.find('.spinner').hide()
           data.context.find('.tick').show()
-    stop: (e) ->
+    done: (e) ->
       folder = $('#target_folder_id').val()
       window.location.href = "/folders/#{folder}"
