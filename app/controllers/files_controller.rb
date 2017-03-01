@@ -9,7 +9,7 @@ class FilesController < ApplicationController
 
   # @file and @folder are set in require_existing_file
   def show
-    send_file @file.attachment.path, :filename => @file.attachment_file_name
+    send_file @file.attachment.path, :filename => @file.attachment_file_name, disposition: :inline
   end
 
   # @target_folder is set in require_existing_target_folder
